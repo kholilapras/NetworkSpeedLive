@@ -29,13 +29,13 @@ jobs:
 
       - name: Build Executable
         run: |
-          python -m PyInstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." Network_Speed_Monitor.py
+          python -m PyInstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." Network_Speed_Live.py
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: NetworkSpeedLive-Executable
-          path: dist/Network_Speed_Monitor.exe
+          path: dist/Network_Speed_Live.exe
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -49,9 +49,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: "v1.0"
-          name: Network_Speed_Monitor.exe
-          asset_path: dist/Network_Speed_Monitor.exe
-          asset_name: Network_Speed_Monitor.exe
+          name: Network_Speed_Live.exe
+          asset_path: dist/Network_Speed_Live.exe
+          asset_name: Network_Speed_Live.exe
           asset_content_type: application/octet-stream
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
