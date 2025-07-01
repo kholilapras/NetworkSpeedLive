@@ -1,10 +1,8 @@
-name: Build Executable with PyInstaller
+name: Build and Release Network Speed Live
 
 on:
   push:
-    branches:
-      - main
-      - dev
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -12,26 +10,45 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'  # Sesuaikan versi Python jika perlu
+          python-version: '3.11'  # Ganti jika kamu pakai versi lain
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
 
-      - name: Build with PyInstaller
+      - name: Build Executable
         run: |
-          python -m PyInstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." Network_Speed_Live.py
+          python -m PyInstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." Internet_Speed_Monitor.py
 
-      - name: Upload artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: NetworkSpeedLive-Executable
           path: dist/Internet_Speed_Monitor.exe
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Release v1.0"
+          tag_name: "v1.0"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v1.0"
+          name: Internet_Speed_Monitor.exe
+          asset_path: dist/Internet_Speed_Monitor.exe
+          asset_name: Internet_Speed_Monitor.exe
+          asset_content_type: application/octet-stream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
