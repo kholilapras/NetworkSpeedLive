@@ -2,7 +2,7 @@ name: Build and Release Network Speed Live
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
