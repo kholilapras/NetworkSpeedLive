@@ -2,8 +2,11 @@ name: Build and Release Network Speed Live
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -16,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'  # Ganti jika kamu pakai versi lain
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: |
@@ -26,13 +29,13 @@ jobs:
 
       - name: Build Executable
         run: |
-          python -m PyInstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." Network_Speed_Live.py
+          python -m PyInstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." Network_Speed_Monitor.py
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: NetworkSpeedLive-Executable
-          path: dist/Internet_Speed_Monitor.exe
+          path: dist/Network_Speed_Monitor.exe
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -40,15 +43,15 @@ jobs:
           name: "Release v1.0"
           tag_name: "v1.0"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:
           tag_name: "v1.0"
-          name: Internet_Speed_Monitor.exe
-          asset_path: dist/Internet_Speed_Monitor.exe
-          asset_name: Internet_Speed_Monitor.exe
+          name: Network_Speed_Monitor.exe
+          asset_path: dist/Network_Speed_Monitor.exe
+          asset_name: Network_Speed_Monitor.exe
           asset_content_type: application/octet-stream
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
