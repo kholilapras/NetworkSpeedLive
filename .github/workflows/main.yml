@@ -37,21 +37,11 @@ jobs:
           name: NetworkSpeedLive-Executable
           path: dist/Network_Speed_Live.exe
 
-      - name: Create GitHub Release
+      - name: Create GitHub Release and Upload .exe
         uses: softprops/action-gh-release@v2
         with:
-          name: "Release v1.0"
-          tag_name: "v1.0"
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-
-      - name: Upload Release Asset
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: "v1.0"
-          name: Network_Speed_Live.exe
-          asset_path: dist/Network_Speed_Live.exe
-          asset_name: Network_Speed_Live.exe
-          asset_content_type: application/octet-stream
+          name: "Release v1.1"
+          tag_name: "v1.1"
+          files: dist/Network_Speed_Live.exe
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
