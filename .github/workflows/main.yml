@@ -26,7 +26,7 @@ jobs:
 
       - name: Build Executable
         run: |
-          python -m PyInstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." Internet_Speed_Monitor.py
+          python -m PyInstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." Network_Speed_Live.py
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
