@@ -96,7 +96,7 @@ def create_tray_icon():
                 speed_label.config(text=f"↙ Download : {current_speed_dl}\n↗ Upload : {current_speed_ul}")
                 time.sleep(0.5)
 
-        link = tk.Label(detail, text="https://github.com/kholilapras/NetworkSpeedMonitor",
+        link = tk.Label(detail, text="https://github.com/kholilapras/NetworkSpeedLive",
                         fg="blue", cursor="hand2", font=("Segoe UI", 9, "underline"))
         link.pack(side="bottom", pady=10)
         link.bind("<Button-1>", lambda e: webbrowser.open(link.cget("text")))
