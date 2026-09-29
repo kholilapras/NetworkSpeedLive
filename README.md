@@ -1,6 +1,6 @@
 # Network Speed Live
 
-A lightweight application to monitor your internet speed in real time using Python and Tkinter.
+A lightweight application to monitor your internet speed in real time using Python & Tkinter.
 
 ## Features
 - Real-time **Download** and **Upload** speed monitoring
